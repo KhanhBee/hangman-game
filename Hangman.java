@@ -62,7 +62,9 @@ public class Hangman {
             System.out.println(ongoingGuess);
             System.out.println("");
             System.out.println("====================================");
-            System.out.println("Already used letters: " + usedLetters);
+            System.out.print("Already used letters: ");
+            listLetters(usedLetters);
+            System.out.println("");
             if (ongoingGuess.indexOf('_') == -1) {
                 System.out.println("You win! The word was '" + word + "'.");
                 System.out.println("");
@@ -71,6 +73,16 @@ public class Hangman {
             }
         }
         System.out.println("You lose! The word was '" + word + "'.");
+    }
+
+    public static void listLetters(String letters) {    // For formatting of the used letters
+        for (int i = 0; i < letters.length(); i++) {
+            if (i != letters.length() - 1){
+                System.out.print(letters.charAt(i) + ",");
+            }else {
+                System.out.print(letters.charAt(i));
+            }
+        }
     }
 
     public static void drawHangman(int guessRemain) {   // Hangman drawing function
