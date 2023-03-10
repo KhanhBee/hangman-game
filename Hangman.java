@@ -4,28 +4,13 @@ public class Hangman {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int guessRemain = 6;
+        WordChoose WordChoose = new WordChoose();
+        String word = WordChoose.getNextWord().toLowerCase();
         String ongoingGuess;
         String usedLetters = "";
         System.out.println("");
         System.out.println("====================================");
-
-        System.out.println("Choose game mode:");
-        System.out.println("1. Manually typed word");
-        System.out.println("2. Randomly generated word");
-
-        int choice = in.nextInt();
-        in.nextLine(); // An error is caused if this line isn't here
-        String word = "";
-        WordList wordList = new WordList();
-
-        if (choice == 1) {
-            System.out.println("Enter the goal word: ");
-            word = in.next().toLowerCase();
-            System.out.println("Word chosen!");
-        }else if (choice == 2) {
-            word = wordList.getNextWord().toLowerCase();
-            System.out.println("Word chosen!");
-        }
+        System.out.println("The computer has chosen a word!");
         
         char[] wordArray = word.toCharArray();
         char[] guessArray = new char[wordArray.length];
@@ -34,8 +19,20 @@ public class Hangman {
         }
 
         while (guessRemain > 0) {
-            System.out.print("Guess a letter: ");
-            char guess = in.nextLine().toLowerCase().charAt(0);
+            
+            String guess = "";
+
+            while (true) {
+                System.out.print("Guess a letter: ");
+                String playerInput = in.nextLine();
+                if (playerInput.length() == 1) {
+                    guess = playerInput.toLowerCase();
+                    break;
+                }else {
+                    System.out.println("Please enter one letter!");
+                }
+            }
+
             if (usedLetters.indexOf(guess) != -1) {
                 System.out.println("Duplicate guess!");
                 continue;
@@ -43,8 +40,8 @@ public class Hangman {
             usedLetters += guess;
             boolean correctLetters = false;
             for (int i = 0; i < wordArray.length; i++) {
-                if (wordArray[i] == guess) {
-                    guessArray[i] = guess;
+                if (wordArray[i] == guess.charAt(0)) {
+                    guessArray[i] = guess.charAt(0);
                     correctLetters = true;
                 }
             }
