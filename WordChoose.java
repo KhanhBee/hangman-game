@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WordList {
+public class WordChoose {
     private List<String> words;
 
-    public WordList() {
+    public WordChoose() {
         this.words = new ArrayList<>();
         try {
             this.words = Files.readAllLines(Paths.get("words.txt"));
@@ -24,7 +24,7 @@ public class WordList {
     }
 
     public static void main(String[] args) {
-        WordList choose = new WordList();
+        WordChoose choose = new WordChoose();
         System.out.println("Random word: " + choose.getNextWord());
     }
 }
