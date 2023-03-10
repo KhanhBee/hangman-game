@@ -8,8 +8,25 @@ public class Hangman {
         String usedLetters = "";
         System.out.println("");
         System.out.println("====================================");
-        System.out.print("Enter the goal word: ");  //A way for the goal word to be chosen randomly from a word bank will be added later.
-        String word = in.nextLine().toLowerCase();
+
+        System.out.println("Choose game mode:");
+        System.out.println("1. Manually typed word");
+        System.out.println("2. Randomly generated word");
+
+        int choice = in.nextInt();
+        in.nextLine(); // An error is caused if this line isn't here
+        String word = "";
+        WordList wordList = new WordList();
+
+        if (choice == 1) {
+            System.out.println("Enter the goal word: ");
+            word = in.next().toLowerCase();
+            System.out.println("Word chosen!");
+        }else if (choice == 2) {
+            word = wordList.getNextWord().toLowerCase();
+            System.out.println("Word chosen!");
+        }
+        
         char[] wordArray = word.toCharArray();
         char[] guessArray = new char[wordArray.length];
         for (int i = 0; i < guessArray.length; i++) {
